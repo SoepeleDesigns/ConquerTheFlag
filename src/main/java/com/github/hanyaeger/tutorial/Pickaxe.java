@@ -8,8 +8,8 @@ public class Pickaxe extends SpriteEntity implements Collider {
     boolean pickedUp;
     BreakableBlock wall;
 
-    Pickaxe(Coordinate2D initialLocation) {
-
+    public Pickaxe(Coordinate2D initialLocation) {
+        super("sprites/pickaxe.png", initialLocation);
     }
 
     void mining () {

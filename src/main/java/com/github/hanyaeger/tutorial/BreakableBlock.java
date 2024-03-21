@@ -4,11 +4,11 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.Collider;
 
 public class BreakableBlock extends Block implements Collider {
-    BreakableBLock(Coordinate2D initialLocation) {
-
+    public BreakableBlock(Coordinate2D initialLocation) {
+        super("sprites/breakableblock.png", initialLocation);
     }
 
-    void breakWall() {
+    public void breakWall() {
 
     }
 }

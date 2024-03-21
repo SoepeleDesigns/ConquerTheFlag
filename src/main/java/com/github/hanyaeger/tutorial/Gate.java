@@ -5,8 +5,8 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 
 public class Gate extends SpriteEntity implements Collider {
-    Gate(Coordinate2D initialLocation) {
-
+   public Gate(Coordinate2D initialLocation) {
+       super("sprites/gate.png", initialLocation);
     }
 
     void removeGate() {

@@ -4,12 +4,8 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 
-public class LaunchPad extends SpriteEntity implements Collider {
-    public LaunchPad(Coordinate2D initialLocation) {
-        super("sprites/launchpad.png", initialLocation);
-    }
-
-    void launch() {
-
+public abstract class Block extends SpriteEntity implements Collider {
+    Block(String resource, Coordinate2D initialLocation) {
+        super(resource, initialLocation);
     }
 }
