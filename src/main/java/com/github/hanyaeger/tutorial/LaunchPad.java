@@ -1,0 +1,15 @@
+package com.github.hanyaeger.tutorial;
+
+import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.entities.Collider;
+import com.github.hanyaeger.api.entities.impl.SpriteEntity;
+
+public class LaunchPad extends SpriteEntity implements Collider {
+    Launchpad(Coordinate2D initialLocation) {
+
+    }
+
+    void launch() {
+
+    }
+}
