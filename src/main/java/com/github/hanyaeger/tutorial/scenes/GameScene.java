@@ -2,11 +2,10 @@ package com.github.hanyaeger.tutorial.scenes;
 
 import com.github.hanyaeger.api.EntitySpawnerContainer;
 import com.github.hanyaeger.api.scenes.DynamicScene;
-import com.github.hanyaeger.api.scenes.TileMapContainer;
 import com.github.hanyaeger.tutorial.ConquerTheFlag;
 
 
-public class GameScene extends DynamicScene implements EntitySpawnerContainer, TileMapContainer {
+public class GameScene extends DynamicScene implements EntitySpawnerContainer {
 
     ConquerTheFlag conquerTheFlag;
 
@@ -27,10 +26,5 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
     @Override
     public void setupEntitySpawners() {
 
-    }
-
-    @Override
-    public void setupTileMaps() {
-        addTileMap(coralTileMap);
     }
 }
