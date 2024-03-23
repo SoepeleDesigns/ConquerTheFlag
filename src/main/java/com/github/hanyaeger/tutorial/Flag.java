@@ -6,6 +6,6 @@ import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 
 public class Flag extends SpriteEntity implements Collider {
     public Flag(String resource, Coordinate2D initialLocation) {
-        super("sprites/'flag'.png", initialLocation);
+        super("sprites/flag.png", initialLocation);
     }
 }
