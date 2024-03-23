@@ -7,4 +7,6 @@ public class UnbreakableBlock extends Block implements Collider {
     public UnbreakableBlock(Coordinate2D initialLocation) {
         super("sprites/unbreakableblock.png", initialLocation);
     }
+
+
 }

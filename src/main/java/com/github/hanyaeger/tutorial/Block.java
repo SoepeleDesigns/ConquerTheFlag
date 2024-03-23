@@ -8,4 +8,6 @@ public abstract class Block extends SpriteEntity implements Collider {
     Block(String resource, Coordinate2D initialLocation) {
         super(resource, initialLocation);
     }
+
+
 }
