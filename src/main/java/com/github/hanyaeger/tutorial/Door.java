@@ -9,8 +9,8 @@ public class Door extends SpriteEntity implements Collider {
     boolean isOpened;
 
     public Door(Coordinate2D initialLocation) {
-        super("sprites/door.png", initialLocation, 1, 1);
-
+        super("sprites/door.png", initialLocation, 1, 2);
+        setCurrentFrameIndex(0);
     }
 
     void openDoor() {
