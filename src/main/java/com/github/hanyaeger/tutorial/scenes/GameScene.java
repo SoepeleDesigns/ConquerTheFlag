@@ -19,7 +19,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
     @Override
     public void setupScene(){
         //setBackgroundAudio("audio/waterworld.mp3");
-        setBackgroundImage("backgrounds/background2.jpg");
+        setBackgroundImage("backgrounds/level2.jpg");
     }
 
     @Override

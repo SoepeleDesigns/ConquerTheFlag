@@ -1,10 +1,7 @@
 package com.github.hanyaeger.tutorial;
 
 import com.github.hanyaeger.api.Coordinate2D;
-import com.github.hanyaeger.api.entities.Collided;
-import com.github.hanyaeger.api.entities.Collider;
-import com.github.hanyaeger.api.entities.Newtonian;
-import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
+import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
@@ -14,24 +11,31 @@ import java.util.List;
 import java.util.Set;
 
 public class Character extends DynamicSpriteEntity implements KeyListener, SceneBorderTouchingWatcher, Newtonian, Collided {
+    private final Animation idleLeftAnimation = new LoopingAnimation(1, 1, 1, 8);
+    private final Animation idleRightAnimation = new LoopingAnimation(2, 1, 2, 8);
+    private final Animation idleAnimation = new LoopingAnimation(0, 0, 0, 0);
+
+    boolean isMoving = true;
     public Character(Coordinate2D location) {
-        super("sprites/character.png", location);
+        super("sprites/character.png", location, 4, 9);
     }
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys){
-        if(pressedKeys.contains(KeyCode.LEFT)){
+        if(pressedKeys.contains(KeyCode.LEFT) && isMoving == true){
             setMotion(3,270d);
-            setCurrentFrameIndex(0);
-        } else if(pressedKeys.contains(KeyCode.RIGHT)){
+           playAnimation(idleLeftAnimation);
+        } else if(pressedKeys.contains(KeyCode.RIGHT) && isMoving == true){
             setMotion(3,90d);
-            setCurrentFrameIndex(1);
-        } else if(pressedKeys.contains(KeyCode.UP)){
+            playAnimation(idleRightAnimation);
+        } else if(pressedKeys.contains(KeyCode.SPACE)){
+            isMoving = false;
             setMotion(3,180d);
-        } else if(pressedKeys.contains(KeyCode.DOWN)){
-            setMotion(3,0d);
+            setCurrentFrameIndex(1);
         } else if(pressedKeys.isEmpty()){
              setSpeed(0);
+             playAnimation(idleAnimation);
+             isMoving = true;
         }
     }
 
