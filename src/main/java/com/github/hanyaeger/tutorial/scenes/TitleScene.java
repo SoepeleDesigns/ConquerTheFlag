@@ -21,14 +21,14 @@ public class TitleScene extends StaticScene {
 
     @Override
     public void setupScene(){
-        setBackgroundAudio("audio/ocean.mp3");
+        //setBackgroundAudio("audio/ocean.mp3");
         setBackgroundImage("backgrounds/background1.jpg");
     }
 
     @Override
     public void setupEntities(){
         var conquerTheFlagText = new TextEntity(
-                new Coordinate2D(getWidth() / 2, getHeight() / 4),
+                new Coordinate2D(0 , getHeight() / 4),
                 "ConquerTheFLag"
         );
         conquerTheFlagText.setFill(Color.PURPLE);
@@ -36,7 +36,7 @@ public class TitleScene extends StaticScene {
         addEntity(conquerTheFlagText);
 
         Button button = new Button(
-                new Coordinate2D(getWidth() / 3,getHeight() / 3), conquerTheFlag);
+                new Coordinate2D(getWidth() / 3,getHeight() / 2), conquerTheFlag);
         addEntity(button);
     }
 }
