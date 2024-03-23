@@ -4,6 +4,7 @@ import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
 import com.github.hanyaeger.api.scenes.StaticScene;
+import com.github.hanyaeger.tutorial.Button;
 import com.github.hanyaeger.tutorial.ConquerTheFlag;
 import javafx.scene.Cursor;
 import javafx.scene.paint.Color;

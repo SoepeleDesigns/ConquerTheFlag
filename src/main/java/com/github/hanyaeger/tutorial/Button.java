@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public abstract class Button extends TextEntity implements MouseExitListener, MouseEnterListener, MouseButtonPressedListener {
+public class Button extends TextEntity implements MouseExitListener, MouseEnterListener, MouseButtonPressedListener {
     private ConquerTheFlag conquerTheFlag;
 
     public Button(Coordinate2D initialLocation, ConquerTheFlag conquerTheFlag) {
