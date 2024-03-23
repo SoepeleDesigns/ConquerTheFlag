@@ -26,27 +26,16 @@ public class TitleScene extends StaticScene {
 
     @Override
     public void setupEntities(){
+        var conquerTheFlagText = new TextEntity(
+                new Coordinate2D(getWidth() / 2, getHeight() / 4),
+                "ConquerTheFLag"
+        );
+        conquerTheFlagText.setFill(Color.PURPLE);
+        conquerTheFlagText.setFont(Font.font("Roboto", FontWeight.BOLD, 100));
+        addEntity(conquerTheFlagText);
 
-    }
-
-
-    @Override
-    public void setCursor(Cursor cursor) {
-        super.setCursor(cursor);
-    }
-
-    @Override
-    public double getWidth() {
-        return super.getWidth();
-    }
-
-    @Override
-    public double getHeight() {
-        return super.getHeight();
-    }
-
-    @Override
-    public void beforeInitialize() {
-        super.beforeInitialize();
+        Button button = new Button(
+                new Coordinate2D(getWidth() / 3,getHeight() / 3), conquerTheFlag);
+        addEntity(button);
     }
 }
