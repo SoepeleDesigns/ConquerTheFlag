@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Character extends DynamicSpriteEntity implements KeyListener, SceneBorderTouchingWatcher, Newtonian, Collided {
-    public Character(String resource, Coordinate2D location) {
+    public Character(Coordinate2D location) {
         super("sprites/character.png", location);
     }
 

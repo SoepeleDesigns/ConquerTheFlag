@@ -6,6 +6,7 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.tutorial.BreakableBlock;
 import com.github.hanyaeger.tutorial.ConquerTheFlag;
 import com.github.hanyaeger.tutorial.Door;
+import com.github.hanyaeger.tutorial.Character;
 
 
 public class GameScene extends DynamicScene implements EntitySpawnerContainer {
@@ -24,6 +25,8 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
     @Override
     public void setupEntities() {
 
+        Character character = new Character(
+                new Coordinate2D(0,0));
 
         Door door = new Door(
                 new Coordinate2D(0, 0));
@@ -33,6 +36,9 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
         BreakableBlock breakableBlock = new BreakableBlock(
                 new Coordinate2D(500, 0));
         addEntity((breakableBlock));
+        addEntity(character);
+
+
     }
 
     @Override
