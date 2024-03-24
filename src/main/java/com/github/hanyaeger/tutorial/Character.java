@@ -31,17 +31,21 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
         if(pressedKeys.contains(KeyCode.LEFT) && isMoving == true){
             setMotion(3,270d);
            playAnimation(idleLeftAnimation);
+            isInteracting = false;
         } else if(pressedKeys.contains(KeyCode.RIGHT) && isMoving == true){
             setMotion(3,90d);
             playAnimation(idleRightAnimation);
+            isInteracting = false;
         } else if(pressedKeys.contains(KeyCode.SPACE)){
             isMoving = false;
             setMotion(3,180d);
             setCurrentFrameIndex(1);
+            isInteracting = false;
         } else if(pressedKeys.isEmpty()){
              setSpeed(0);
              playAnimation(idleAnimation);
              isMoving = true;
+             isInteracting = false;
         } else if(pressedKeys.contains(KeyCode.E)) {
             isInteracting = true;
         }
