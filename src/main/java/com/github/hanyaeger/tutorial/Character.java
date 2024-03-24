@@ -16,6 +16,8 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     private final Animation idleAnimation = new LoopingAnimation(0, 0, 0, 0);
 
     private boolean touchdown = true;
+    //switchCollision blijft true als eenmaal true!!!
+    boolean switchCollision = false;
     boolean isMoving = true;
     public Character(Coordinate2D location) {
         super("sprites/character.png", location, 4, 9);
@@ -37,6 +39,8 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
              setSpeed(0);
              playAnimation(idleAnimation);
              isMoving = true;
+        } else if(pressedKeys.contains(KeyCode.E) && switchCollision) {
+            Switch.switchen;
         }
     }
 
@@ -62,8 +66,15 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     }
 
     @Override
-    public void onCollision(List<Collider> list) {
-        //setAnchorLocationX(viarabelen.getBoundingBox().getMinY() + 1);
-        touchdown = true;
+    public void onCollision(List<Collider> collidingObject) {
+        for (Collider collider : collidingObject) {
+            if (collider instanceof Switch) {
+                switchCollision = true;
+
+            }
+        }
+
+
     }
+
 }

@@ -6,6 +6,7 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.tutorial.*;
 import com.github.hanyaeger.tutorial.Character;
 import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.tutorial.Switch;
 
 
 public class GameScene extends DynamicScene implements EntitySpawnerContainer {
@@ -32,6 +33,10 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
 
         addEntity(door);
 
+
+        Switch lever = new Switch(
+              new Coordinate2D(200, getHeight() - 50));
+                addEntity(lever);
 
       BreakableBlock breakableBlock = new BreakableBlock(
                new Coordinate2D(0, 50));
