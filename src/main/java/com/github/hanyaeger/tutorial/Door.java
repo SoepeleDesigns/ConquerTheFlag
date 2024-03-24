@@ -6,7 +6,7 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 
 public class Door extends SpriteEntity implements Collider {
-    boolean isOpened;
+    boolean isOpened = false;
 
     public Door(Coordinate2D initialLocation) {
         super("sprites/door.png", initialLocation, 1, 2);
@@ -14,6 +14,7 @@ public class Door extends SpriteEntity implements Collider {
     }
 
     void openDoor() {
+        isOpened = true;
         setCurrentFrameIndex(1);
     }
 }

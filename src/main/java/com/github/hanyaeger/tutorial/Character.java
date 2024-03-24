@@ -75,6 +75,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     @Override
     public void onCollision(List<Collider> collidingObject) {
         Switch collidedSwitch;
+        Door collidedDoor;
         for (Collider collider : collidingObject) {
             if (collider instanceof Switch) {
                 switchCollision = true;
@@ -92,7 +93,18 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                     isInteracting = false;
                     conquerTheFlag.setActiveScene(2);
                 }
-
+            }
+            if (collider instanceof Door)
+            {
+                collidedDoor = (Door)collider;
+                if (collidedDoor.isOpened == true)
+                {
+                    if (isInteracting == true)
+                    {
+                        isInteracting = false;
+                        conquerTheFlag.setActiveScene(2);
+                    }
+                }
             }
         }
     }
