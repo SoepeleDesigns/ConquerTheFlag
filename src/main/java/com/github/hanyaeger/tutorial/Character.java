@@ -15,6 +15,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     private final Animation idleRightAnimation = new LoopingAnimation(2, 1, 2, 8);
     private final Animation idleAnimation = new LoopingAnimation(0, 0, 0, 0);
 
+    private boolean touchdown = true;
     boolean isMoving = true;
     public Character(Coordinate2D location) {
         super("sprites/character.png", location, 4, 9);
@@ -62,6 +63,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
 
     @Override
     public void onCollision(List<Collider> list) {
-
+        //setAnchorLocationX(viarabelen.getBoundingBox().getMinY() + 1);
+        touchdown = true;
     }
 }
