@@ -1,9 +1,13 @@
 package com.github.hanyaeger.tutorial.scenes;
 
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.entities.impl.TextEntity;
 import com.github.hanyaeger.api.scenes.StaticScene;
 import com.github.hanyaeger.tutorial.Button;
 import com.github.hanyaeger.tutorial.ConquerTheFlag;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class EndScene extends StaticScene {
 
@@ -15,14 +19,25 @@ public class EndScene extends StaticScene {
 
     @Override
     public void setupScene() {
-        //setBackgroundAudio("audio/ocean.mp3");
-        setBackgroundImage("backgrounds/background3.jpg");
+        setBackgroundAudio("audio/GameOver.mp3");
+        setBackgroundImage("backgrounds/gameovermenu.png");
     }
 
     @Override
     public void setupEntities() {
+
+        var gameOverText = new TextEntity(
+                new Coordinate2D(getWidth() / 4 + 10, getHeight() / 3),
+                "U heeft gewonnen!"
+        );
+        gameOverText.setFill(Color.WHITE);
+        gameOverText.setFont(Font.font("Roboto", FontWeight.BOLD, 40));
+
+        addEntity(gameOverText);
+
         Button button = new Button(
-                new Coordinate2D(getWidth() / 3,getHeight() / 2), conquerTheFlag);
+                new Coordinate2D(getWidth() / 3,getHeight() / 2), conquerTheFlag, "Nieuw Spel");
+
         addEntity(button);
     }
 }

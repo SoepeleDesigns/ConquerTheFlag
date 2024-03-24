@@ -14,6 +14,6 @@ public class Door extends SpriteEntity implements Collider {
     }
 
     void openDoor() {
-
+        setCurrentFrameIndex(1);
     }
 }

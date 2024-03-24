@@ -11,6 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.util.Scanner;
+
 public class TitleScene extends StaticScene {
 
     private ConquerTheFlag conquerTheFlag;
@@ -21,22 +23,23 @@ public class TitleScene extends StaticScene {
 
     @Override
     public void setupScene(){
-        //setBackgroundAudio("audio/ocean.mp3");
-        setBackgroundImage("backgrounds/background1.jpg");
+        setBackgroundAudio("audio/ConquerTheFlag.mp3");
+        setBackgroundImage("backgrounds/menubackground.png");
     }
 
     @Override
     public void setupEntities(){
+
         var conquerTheFlagText = new TextEntity(
-                new Coordinate2D(0 , getHeight() / 4),
-                "ConquerTheFLag"
+                new Coordinate2D(getWidth() / 3 - 20 , getHeight() / 4 - 30),
+                "Conquer the Flag!"
         );
-        conquerTheFlagText.setFill(Color.PURPLE);
-        conquerTheFlagText.setFont(Font.font("Roboto", FontWeight.BOLD, 100));
+        conquerTheFlagText.setFill(Color.BLUEVIOLET);
+        conquerTheFlagText.setFont(Font.font("Roboto", FontWeight.BOLD, 50));
         addEntity(conquerTheFlagText);
 
         Button button = new Button(
-                new Coordinate2D(getWidth() / 3,getHeight() / 2), conquerTheFlag);
+                new Coordinate2D(getWidth() / 3,getHeight() / 2), conquerTheFlag, "Start game");
         addEntity(button);
     }
 }

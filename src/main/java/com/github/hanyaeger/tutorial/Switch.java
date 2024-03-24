@@ -9,11 +9,15 @@ public class Switch extends SpriteEntity implements Collider {
     Gate gate;
     Door door;
 
-    public Switch(Coordinate2D initialLocation) {
-        super("sprites/switch.png", initialLocation, new Size(50, 50));
+    public Switch(Coordinate2D initialLocation, Door door) {
+        super("sprites/switch.png", initialLocation, new Size(50, 50), 1,2);
+        this.door = door;
+        setCurrentFrameIndex(1);
+
     }
 
     void switching() {
-
+        setCurrentFrameIndex(0);
+        door.openDoor();
     }
 }

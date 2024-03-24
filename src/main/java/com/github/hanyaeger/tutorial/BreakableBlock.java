@@ -6,7 +6,7 @@ import com.github.hanyaeger.api.entities.Collider;
 
 public class BreakableBlock extends Block implements Collider {
     public BreakableBlock(Coordinate2D initialLocation) {
-        super("sprites/breakableblock.png", initialLocation, new Size(1500, 150));
+        super("sprites/breakableblock.png", initialLocation, new Size(50, 50));
     }
 
     public void breakWall() {

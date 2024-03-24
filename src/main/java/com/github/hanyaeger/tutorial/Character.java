@@ -16,11 +16,14 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     private final Animation idleAnimation = new LoopingAnimation(0, 0, 0, 0);
 
     private boolean touchdown = true;
+    ConquerTheFlag conquerTheFlag;
     //switchCollision blijft true als eenmaal true!!!
-    boolean switchCollision = false;
-    boolean isMoving = true;
-    public Character(Coordinate2D location) {
+    private boolean switchCollision = false;
+    private boolean isMoving = true;
+    private boolean isInteracting = false;
+    public Character(Coordinate2D location, ConquerTheFlag conquerTheFlag) {
         super("sprites/character.png", location, 4, 9);
+        this.conquerTheFlag = conquerTheFlag;
     }
 
     @Override
@@ -39,8 +42,8 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
              setSpeed(0);
              playAnimation(idleAnimation);
              isMoving = true;
-        } else if(pressedKeys.contains(KeyCode.E) && switchCollision) {
-            Switch.switchen;
+        } else if(pressedKeys.contains(KeyCode.E)) {
+            isInteracting = true;
         }
     }
 
@@ -67,14 +70,26 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
 
     @Override
     public void onCollision(List<Collider> collidingObject) {
+        Switch collidedSwitch;
         for (Collider collider : collidingObject) {
             if (collider instanceof Switch) {
                 switchCollision = true;
+                if (switchCollision == true && isInteracting == true)
+                {
+                    collidedSwitch = (Switch)collider;
+                    collidedSwitch.switching();
+                    isInteracting = false;
+                }
+            }
+            if (collider instanceof Flag)
+            {
+                if (isInteracting == true)
+                {
+                    isInteracting = false;
+                    conquerTheFlag.setActiveScene(2);
+                }
 
             }
         }
-
-
     }
-
 }
