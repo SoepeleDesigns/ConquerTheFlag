@@ -23,7 +23,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
     }
     @Override
     public void setupScene(){
-        setBackgroundAudio("audio/level2.mp3");
+        //setBackgroundAudio("audio/level2.mp3");
         setBackgroundImage("backgrounds/level2.jpg");
     }
 
@@ -50,6 +50,10 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
 
         Pickaxe pickaxe = new Pickaxe(
                 new Coordinate2D(300, 300));
+
+        var Hitbox = new Hitbox(
+                new Coordinate2D(getWidth() - 400,getHeight() - 50), new Size(400, 10));
+        addEntity(Hitbox);
 
         addEntity(character);
         addEntity(door);

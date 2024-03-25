@@ -90,6 +90,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
             case BOTTOM:
                 setAnchorLocationY(getSceneHeight() - getHeight() - 1);
                 touchdown = true;
+                setGravityConstant(NOTFALLING);
                 playAnimation(idleAnimation);
                 break;
             case LEFT:
@@ -108,6 +109,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
         Door collidedDoor;
         UnbreakableBlock platform;
         Pickaxe collidedPickaxe;
+        Hitbox hitbox;
         boolean pickaxePickedup;
         for (Collider collider : collidingObject) {
             if (collider instanceof Switch) {
@@ -174,15 +176,16 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                         System.out.println("detection zijde");
                         break;
                             //van boven
-                    case 150:
-                        setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight() - 20);
-                        System.out.println("detection boven");
-                        touchdown = true;
-                        setGravityConstant(NOTFALLING);
-                        playAnimation(idleAnimation);
-                        break;
-
                 }
+            }
+            if (collider instanceof Hitbox) {
+                System.out.println("Hitbox");
+                hitbox = (Hitbox)collider;
+                //"case 150 -- detection above
+                setAnchorLocationY(hitbox.getBoundingBox().getMinY() - getHeight());
+                System.out.println("detection boven");
+                touchdown = true;
+                setGravityConstant(NOTFALLING);
             }
             }
         }
