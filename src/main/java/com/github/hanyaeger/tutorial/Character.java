@@ -111,6 +111,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 if (isInteracting == true)
                 {
                     isInteracting = false;
+                    // commit
                     conquerTheFlag.setActiveScene(2);
                 }
             }
