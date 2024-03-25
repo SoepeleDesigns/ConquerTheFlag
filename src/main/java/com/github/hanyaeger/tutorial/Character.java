@@ -14,51 +14,65 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     private final Animation idleLeftAnimation = new LoopingAnimation(1, 1, 1, 8);
     private final Animation idleRightAnimation = new LoopingAnimation(2, 1, 2, 8);
     private final Animation idleAnimation = new LoopingAnimation(0, 0, 0, 0);
+    private final Animation jumpAnimation = new LoopingAnimation(3, 1, 3, 1);
+
 
     private boolean touchdown = true;
     ConquerTheFlag conquerTheFlag;
     //switchCollision blijft true als eenmaal true!!!
     private boolean switchCollision = false;
-    private boolean isMoving = true;
+    private final double FALLING = 0.1;
+    private final double NOTFALLING = 0;
+
     private boolean isInteracting = false;
     public Character(Coordinate2D location, ConquerTheFlag conquerTheFlag) {
         super("sprites/character.png", location, 4, 9);
         this.conquerTheFlag = conquerTheFlag;
+        setGravityConstant(FALLING);
     }
 
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys){
-        System.out.println("hij werkt met keycode printen" + pressedKeys);
+       // System.out.println("hij werkt met keycode printen" + pressedKeys);
+
+        if (touchdown == false)
+        {
+            setGravityConstant(FALLING);
+        }
         if (pressedKeys.contains(KeyCode.SPACE))
         {
-            touchdown = false;
-            System.out.println("hij werkt met printen");
-            if(pressedKeys.contains(KeyCode.LEFT) && isMoving)
+            setGravityConstant(FALLING);
+            playAnimation(jumpAnimation);
+            if (touchdown)
+            {
+                setMotion(7,180d);
+            }
+
+          //  System.out.println("hij werkt met printen");
+            if(pressedKeys.contains(KeyCode.LEFT) && touchdown)
             {
                 setMotion(7,200d);
-                setCurrentFrameIndex(1);
+
             }
-            else if (pressedKeys.contains(KeyCode.RIGHT) && isMoving){
+            else if (pressedKeys.contains(KeyCode.RIGHT) && touchdown){
             setMotion(7,150d);
-            setCurrentFrameIndex(1);
             }
             isInteracting = false;
-            isMoving = false;
+            touchdown = false;
         }
-        else if (pressedKeys.contains(KeyCode.LEFT) && isMoving){
+        else if (pressedKeys.contains(KeyCode.LEFT) && touchdown){
             setMotion(3,270d);
            playAnimation(idleLeftAnimation);
             isInteracting = false;
         }
-        else if(pressedKeys.contains(KeyCode.RIGHT) && isMoving){
+        else if(pressedKeys.contains(KeyCode.RIGHT) && touchdown){
             setMotion(3,90d);
             playAnimation(idleRightAnimation);
             isInteracting = false;
         }else if(pressedKeys.isEmpty() && touchdown){
              setSpeed(0);
              playAnimation(idleAnimation);
-             isMoving = true;
              isInteracting = false;
         } else if(pressedKeys.contains(KeyCode.E)) {
             isInteracting = true;
@@ -76,6 +90,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
             case BOTTOM:
                 setAnchorLocationY(getSceneHeight() - getHeight() - 1);
                 touchdown = true;
+                playAnimation(idleAnimation);
                 break;
             case LEFT:
                 setAnchorLocationX(1);
@@ -97,7 +112,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
         for (Collider collider : collidingObject) {
             if (collider instanceof Switch) {
                 switchCollision = true;
-                System.out.println("SWITCH");
+               // System.out.println("SWITCH");
                 if (switchCollision == true && isInteracting == true)
                 {
                     collidedSwitch = (Switch)collider;
@@ -111,7 +126,6 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 if (isInteracting == true)
                 {
                     isInteracting = false;
-                    // commit
                     conquerTheFlag.setActiveScene(2);
                 }
             }
@@ -133,38 +147,41 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 collidedPickaxe = (Pickaxe)collider;
                 collidedPickaxe.pickaxeTopleft();
             }
+
             if (collider instanceof UnbreakableBlock)
             {
                 platform = (UnbreakableBlock)collider;
+                System.out.println((int)getDirection());
 
-                setSpeed(0);
                 switch ((int)getDirection())
                 {
                     case 90: // van links
                         setAnchorLocationX(platform.getBoundingBox().getMinX() - getWidth() - 10);
                         touchdown = true;
-                        isMoving = true;
+                        System.out.println("detection LINKERZIJDE");
                         break;
 
                     case 180:
-                        setAnchorLocationY(platform.getBoundingBox().getMaxY() + 10);
-                        System.out.println("UP");
+                        // van onder
+                        setAnchorLocationY(platform.getBoundingBox().getMaxY() + 30);
+                        System.out.println("detection onder");
                         touchdown = true;
-                        isMoving = true;
                         break;
 
                     case 270:
                         setAnchorLocationX(platform.getBoundingBox().getMaxX() + 10);
                         touchdown = true;
-                        isMoving = true;
+                        System.out.println("detection zijde");
+                        break;
+                            //van boven
+                    case 150:
+                        setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight() - 20);
+                        System.out.println("detection boven");
+                        touchdown = true;
+                        setGravityConstant(NOTFALLING);
+                        playAnimation(idleAnimation);
                         break;
 
-                    case 0:
-                        setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight());
-                        System.out.println("DOWN");
-                        touchdown = true;
-                        isMoving = true;
-                        break;
                 }
             }
             }

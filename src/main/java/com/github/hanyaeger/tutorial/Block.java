@@ -12,7 +12,7 @@ public abstract class Block extends SpriteEntity implements Collider {
 
     public Block(String resource, Coordinate2D initialLocation, Size size) {
         super(resource, initialLocation, size);
-        setAnchorPoint(AnchorPoint.BOTTOM_LEFT);
+       // setAnchorPoint(AnchorPoint.BOTTOM_LEFT);
 
     }
 

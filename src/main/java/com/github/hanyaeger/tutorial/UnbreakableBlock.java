@@ -6,8 +6,6 @@ import com.github.hanyaeger.api.entities.Collider;
 
 public class UnbreakableBlock extends Block {
     public UnbreakableBlock(Coordinate2D initialLocation) {
-        super("sprites/unbreakableblock.png", initialLocation, new Size(100, 50));
+        super("sprites/unbreakableblock.png", initialLocation, new Size(70, 70));
     }
-
-
 }
