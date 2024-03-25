@@ -32,26 +32,30 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
         System.out.println("hij werkt met keycode printen" + pressedKeys);
         if (pressedKeys.contains(KeyCode.SPACE))
         {
+            touchdown = false;
             System.out.println("hij werkt met printen");
             if(pressedKeys.contains(KeyCode.LEFT) && isMoving)
             {
                 setMotion(7,200d);
                 setCurrentFrameIndex(1);
-                setSpeed(0);
             }
-            else if (pressedKeys.contains(KeyCode.RIGHT)){
+            else if (pressedKeys.contains(KeyCode.RIGHT) && isMoving){
             setMotion(7,150d);
             setCurrentFrameIndex(1);
-            setSpeed(0);
             }
             isInteracting = false;
             isMoving = false;
         }
-        if(pressedKeys.contains(KeyCode.LEFT) && isMoving){
+        else if (pressedKeys.contains(KeyCode.LEFT) && isMoving){
             setMotion(3,270d);
            playAnimation(idleLeftAnimation);
             isInteracting = false;
-        } else if(pressedKeys.isEmpty()){
+        }
+        else if(pressedKeys.contains(KeyCode.RIGHT) && isMoving){
+            setMotion(3,90d);
+            playAnimation(idleRightAnimation);
+            isInteracting = false;
+        }else if(pressedKeys.isEmpty() && touchdown){
              setSpeed(0);
              playAnimation(idleAnimation);
              isMoving = true;
@@ -71,6 +75,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 break;
             case BOTTOM:
                 setAnchorLocationY(getSceneHeight() - getHeight() - 1);
+                touchdown = true;
                 break;
             case LEFT:
                 setAnchorLocationX(1);
@@ -130,23 +135,34 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
             if (collider instanceof UnbreakableBlock)
             {
                 platform = (UnbreakableBlock)collider;
+
                 setSpeed(0);
                 switch ((int)getDirection())
                 {
                     case 90: // van links
                         setAnchorLocationX(platform.getBoundingBox().getMinX() - getWidth() - 10);
+                        touchdown = true;
+                        isMoving = true;
                         break;
 
                     case 180:
                         setAnchorLocationY(platform.getBoundingBox().getMaxY() + 10);
+                        System.out.println("UP");
+                        touchdown = true;
+                        isMoving = true;
                         break;
 
                     case 270:
                         setAnchorLocationX(platform.getBoundingBox().getMaxX() + 10);
+                        touchdown = true;
+                        isMoving = true;
                         break;
 
                     case 0:
                         setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight());
+                        System.out.println("DOWN");
+                        touchdown = true;
+                        isMoving = true;
                         break;
                 }
             }
