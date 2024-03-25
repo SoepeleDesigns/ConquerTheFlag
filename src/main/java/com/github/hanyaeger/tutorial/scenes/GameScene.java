@@ -43,7 +43,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
                new Coordinate2D(0, 50));
 
    UnbreakableBlock unbreakableBlock = new UnbreakableBlock(
-                new Coordinate2D(500, 50));
+                new Coordinate2D(500, 500));
 
         Flag flag = new Flag(
                 new Coordinate2D(getWidth() - 100, getHeight() - 60));

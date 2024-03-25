@@ -26,20 +26,30 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
         this.conquerTheFlag = conquerTheFlag;
     }
 
+
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys){
-        if(pressedKeys.contains(KeyCode.LEFT) && isMoving == true){
+        System.out.println("hij werkt met keycode printen" + pressedKeys);
+        if (pressedKeys.contains(KeyCode.SPACE))
+        {
+            System.out.println("hij werkt met printen");
+            if(pressedKeys.contains(KeyCode.LEFT) && isMoving)
+            {
+                setMotion(7,200d);
+                setCurrentFrameIndex(1);
+                setSpeed(0);
+            }
+            else if (pressedKeys.contains(KeyCode.RIGHT)){
+            setMotion(7,150d);
+            setCurrentFrameIndex(1);
+            setSpeed(0);
+            }
+            isInteracting = false;
+            isMoving = false;
+        }
+        if(pressedKeys.contains(KeyCode.LEFT) && isMoving){
             setMotion(3,270d);
            playAnimation(idleLeftAnimation);
-            isInteracting = false;
-        } else if(pressedKeys.contains(KeyCode.RIGHT) && isMoving == true){
-            setMotion(3,90d);
-            playAnimation(idleRightAnimation);
-            isInteracting = false;
-        } else if(pressedKeys.contains(KeyCode.SPACE)){
-            isMoving = false;
-            setMotion(3,180d);
-            setCurrentFrameIndex(1);
             isInteracting = false;
         } else if(pressedKeys.isEmpty()){
              setSpeed(0);
@@ -76,6 +86,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     public void onCollision(List<Collider> collidingObject) {
         Switch collidedSwitch;
         Door collidedDoor;
+        UnbreakableBlock platform;
         Pickaxe collidedPickaxe;
         boolean pickaxePickedup;
         for (Collider collider : collidingObject) {
@@ -116,6 +127,31 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 collidedPickaxe = (Pickaxe)collider;
                 collidedPickaxe.pickaxeTopleft();
             }
+            if (collider instanceof UnbreakableBlock)
+            {
+                platform = (UnbreakableBlock)collider;
+                setSpeed(0);
+                switch ((int)getDirection())
+                {
+                    case 90: // van links
+                        setAnchorLocationX(platform.getBoundingBox().getMinX() - getWidth() - 10);
+                        break;
+
+                    case 180:
+                        setAnchorLocationY(platform.getBoundingBox().getMaxY() + 10);
+                        break;
+
+                    case 270:
+                        setAnchorLocationX(platform.getBoundingBox().getMaxX() + 10);
+                        break;
+
+                    case 0:
+                        setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight());
+                        break;
+                }
+            }
+            }
         }
     }
-}
+
+
