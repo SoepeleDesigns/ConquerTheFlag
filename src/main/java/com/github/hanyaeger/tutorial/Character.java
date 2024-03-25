@@ -76,9 +76,12 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     public void onCollision(List<Collider> collidingObject) {
         Switch collidedSwitch;
         Door collidedDoor;
+        Pickaxe collidedPickaxe;
+        boolean pickaxePickedup;
         for (Collider collider : collidingObject) {
             if (collider instanceof Switch) {
                 switchCollision = true;
+                System.out.println("SWITCH");
                 if (switchCollision == true && isInteracting == true)
                 {
                     collidedSwitch = (Switch)collider;
@@ -87,6 +90,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 }
             }
             if (collider instanceof Flag)
+                System.out.println("FLAG");
             {
                 if (isInteracting == true)
                 {
@@ -105,6 +109,12 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                         conquerTheFlag.setActiveScene(2);
                     }
                 }
+            }
+            if (collider instanceof Pickaxe) {
+                System.out.println("Pickaxe");
+                pickaxePickedup = true;
+                collidedPickaxe = (Pickaxe)collider;
+                collidedPickaxe.pickaxeTopleft();
             }
         }
     }
