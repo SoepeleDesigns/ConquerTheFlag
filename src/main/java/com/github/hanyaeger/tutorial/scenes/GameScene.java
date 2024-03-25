@@ -3,20 +3,20 @@ package com.github.hanyaeger.tutorial.scenes;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.EntitySpawnerContainer;
 import com.github.hanyaeger.api.scenes.DynamicScene;
+import com.github.hanyaeger.api.scenes.TileMapContainer;
 import com.github.hanyaeger.tutorial.*;
 import com.github.hanyaeger.tutorial.Character;
-import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.tutorial.Switch;
 import com.github.hanyaeger.tutorial.Flag;
 import com.github.hanyaeger.tutorial.Pickaxe;
+import com.github.hanyaeger.tutorial.map.BlockTileMap;
+import com.github.hanyaeger.tutorial.map.BreakableBlock;
 
-import java.util.Scanner;
-
-
-public class GameScene extends DynamicScene implements EntitySpawnerContainer {
-
+public class GameScene extends DynamicScene implements EntitySpawnerContainer, TileMapContainer {
 
     ConquerTheFlag conquerTheFlag;
+
+    BlockTileMap blockTileMap = new BlockTileMap();
 
     public GameScene(ConquerTheFlag conquerTheFlag){
         this.conquerTheFlag = conquerTheFlag;
@@ -39,11 +39,6 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
         Switch lever = new Switch(
               new Coordinate2D(200, getHeight() - 50), door);
 
-      BreakableBlock breakableBlock = new BreakableBlock(
-               new Coordinate2D(0, 50));
-
-   UnbreakableBlock unbreakableBlock = new UnbreakableBlock(
-                new Coordinate2D(getWidth() - 100, getHeight() - 50));
 
         Flag flag = new Flag(
                 new Coordinate2D(getWidth() - 400, getHeight() - 60));
@@ -51,24 +46,22 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer {
         Pickaxe pickaxe = new Pickaxe(
                 new Coordinate2D(300, 300));
 
-        var Hitbox = new Hitbox(
-                new Coordinate2D(getWidth() - 400,getHeight() - 50), new Size(400, 10));
-        addEntity(Hitbox);
 
-        addEntity(character);
         addEntity(door);
         addEntity((lever));
-        addEntity(breakableBlock);
-        addEntity(unbreakableBlock);
         addEntity(flag);
         addEntity(pickaxe);
-
+        addEntity(character);
 
     }
 
     @Override
     public void setupEntitySpawners() {
 
+    }
+
+    public void setupTileMaps() {
+        addTileMap(blockTileMap);
     }
 
 }

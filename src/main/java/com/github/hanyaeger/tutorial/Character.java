@@ -5,6 +5,7 @@ import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
+import com.github.hanyaeger.tutorial.map.UnbreakableBlock;
 import javafx.scene.input.KeyCode;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     private final Animation idleAnimation = new LoopingAnimation(0, 0, 0, 0);
     private final Animation jumpAnimation = new LoopingAnimation(3, 1, 3, 1);
 
+    private boolean movementAllowed;
 
     private boolean touchdown = true;
     ConquerTheFlag conquerTheFlag;
@@ -33,51 +35,49 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
 
 
     @Override
-    public void onPressedKeysChange(Set<KeyCode> pressedKeys){
-       // System.out.println("hij werkt met keycode printen" + pressedKeys);
+    public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
+        // System.out.println("hij werkt met keycode printen" + pressedKeys);
+        if (movementAllowed) {
 
-        if (touchdown == false)
-        {
-            setGravityConstant(FALLING);
-        }
-        if (pressedKeys.contains(KeyCode.SPACE))
-        {
-            setGravityConstant(FALLING);
-            playAnimation(jumpAnimation);
-            if (touchdown)
-            {
-                setMotion(7,180d);
-            }
 
-          //  System.out.println("hij werkt met printen");
-            if(pressedKeys.contains(KeyCode.LEFT) && touchdown)
-            {
-                setMotion(7,200d);
+            if (touchdown == false) {
+                setGravityConstant(FALLING);
+            }
+            if (pressedKeys.contains(KeyCode.SPACE)) {
+                setGravityConstant(FALLING);
+                playAnimation(jumpAnimation);
+                if (touchdown) {
+                    setMotion(7, 180d);
+                }
 
+                //  System.out.println("hij werkt met printen");
+                if (pressedKeys.contains(KeyCode.LEFT) && touchdown) {
+                    setMotion(7, 200d);
+
+                } else if (pressedKeys.contains(KeyCode.RIGHT) && touchdown) {
+                    setMotion(7, 150d);
+                }
+                isInteracting = false;
+                touchdown = false;
+            } else if (pressedKeys.contains(KeyCode.LEFT) && touchdown) {
+                setMotion(3, 270d);
+                playAnimation(idleLeftAnimation);
+                isInteracting = false;
+            } else if (pressedKeys.contains(KeyCode.RIGHT) && touchdown) {
+                setMotion(3, 90d);
+                playAnimation(idleRightAnimation);
+                isInteracting = false;
+            } else if (pressedKeys.isEmpty() && touchdown) {
+                setSpeed(0);
+                playAnimation(idleAnimation);
+                isInteracting = false;
+            } else if (pressedKeys.contains(KeyCode.E)) {
+                isInteracting = true;
             }
-            else if (pressedKeys.contains(KeyCode.RIGHT) && touchdown){
-            setMotion(7,150d);
-            }
-            isInteracting = false;
-            touchdown = false;
         }
-        else if (pressedKeys.contains(KeyCode.LEFT) && touchdown){
-            setMotion(3,270d);
-           playAnimation(idleLeftAnimation);
-            isInteracting = false;
-        }
-        else if(pressedKeys.contains(KeyCode.RIGHT) && touchdown){
-            setMotion(3,90d);
-            playAnimation(idleRightAnimation);
-            isInteracting = false;
-        }else if(pressedKeys.isEmpty() && touchdown){
-             setSpeed(0);
-             playAnimation(idleAnimation);
-             isInteracting = false;
-        } else if(pressedKeys.contains(KeyCode.E)) {
-            isInteracting = true;
-        }
+        movementAllowed = false;
     }
+
 
     @Override
     public void notifyBoundaryTouching(SceneBorder border){
@@ -86,18 +86,22 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
         switch(border){
             case TOP:
                 setAnchorLocationY(1);
+                movementAllowed = true;
                 break;
             case BOTTOM:
                 setAnchorLocationY(getSceneHeight() - getHeight() - 1);
                 touchdown = true;
                 setGravityConstant(NOTFALLING);
                 playAnimation(idleAnimation);
+                movementAllowed = true;
                 break;
             case LEFT:
                 setAnchorLocationX(1);
+                movementAllowed = true;
                 break;
             case RIGHT:
                 setAnchorLocationX(getSceneWidth() - getWidth() - 1);
+                movementAllowed = true;
             default:
                 break;
         }
@@ -153,8 +157,14 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
             if (collider instanceof UnbreakableBlock)
             {
                 platform = (UnbreakableBlock)collider;
-                System.out.println((int)getDirection());
+                //"case 150 -- detection above
+                setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight());
 
+                System.out.println((int)getDirection());
+                setGravityConstant(FALLING);
+                touchdown = true;
+                movementAllowed = true;
+                /*
                 switch ((int)getDirection())
                 {
                     case 90: // van links
@@ -175,8 +185,11 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                         touchdown = true;
                         System.out.println("detection zijde");
                         break;
+
                             //van boven
                 }
+
+                 */
             }
             if (collider instanceof Hitbox) {
                 System.out.println("Hitbox");
@@ -184,8 +197,9 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 //"case 150 -- detection above
                 setAnchorLocationY(hitbox.getBoundingBox().getMinY() - getHeight());
                 System.out.println("detection boven");
+                setGravityConstant(FALLING);
                 touchdown = true;
-                setGravityConstant(NOTFALLING);
+
             }
             }
         }

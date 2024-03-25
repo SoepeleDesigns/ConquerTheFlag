@@ -15,8 +15,6 @@ public class Hitbox extends RectangleEntity implements Collider {
     public Hitbox(final Coordinate2D initialLocation, final Size size) {
         super(initialLocation, size);
         setAnchorPoint(AnchorPoint.BOTTOM_LEFT);
-
-
         setFill(COLOR);
         //setOpacity(OPACITY);
     }
