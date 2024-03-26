@@ -9,6 +9,5 @@ import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 public class Block extends SpriteEntity implements Collider {
     public Block(Coordinate2D initialLocation, Size size, String resource) {
         super(resource, initialLocation, size);
-        setAnchorPoint(AnchorPoint.BOTTOM_LEFT);
     }
 }
