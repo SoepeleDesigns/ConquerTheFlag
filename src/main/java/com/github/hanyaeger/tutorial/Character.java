@@ -28,13 +28,16 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     private final Animation jumpAnimation = new LoopingAnimation(3, 1, 3, 1);
 
     public Character(Coordinate2D location, ConquerTheFlag conquerTheFlag) {
-        super("sprites/character.png", location, new Size(50, 40), 4, 9);
+        super("sprites/character.png", location, new Size(50, 42), 4, 9);
         this.conquerTheFlag = conquerTheFlag;
         setGravityConstant(FALLING);
     }
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
+        if (pressedKeys.contains(KeyCode.E)) {
+            isInteracting = true;
+        }
         // System.out.println("hij werkt met keycode printen" + pressedKeys);
         if (touchdown) {
             if (pressedKeys.contains(KeyCode.SPACE)) {
@@ -63,8 +66,6 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 setSpeed(0);
                 playAnimation(idleAnimation);
                 isInteracting = false;
-            } else if (pressedKeys.contains(KeyCode.E)) {
-                isInteracting = true;
             }
         }
     }

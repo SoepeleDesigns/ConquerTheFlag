@@ -7,7 +7,7 @@ import com.github.hanyaeger.api.entities.impl.RectangleEntity;
 
 public class Gate extends RectangleEntity implements Collider {
     public Gate(Coordinate2D initialLocation) {
-        super(initialLocation, new Size(20, 100));
+        super(initialLocation, new Size(20, 95));
     }
 
     public void openGate() {
