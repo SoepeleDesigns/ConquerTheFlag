@@ -6,6 +6,7 @@ import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
+import com.github.hanyaeger.tutorial.map.Block;
 import com.github.hanyaeger.tutorial.map.BreakableBlock;
 import com.github.hanyaeger.tutorial.map.LaunchPad;
 import com.github.hanyaeger.tutorial.map.UnbreakableBlock;
@@ -113,12 +114,15 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
             }
             if (collider instanceof Flag)
             {
-                System.out.println("FLAG");
+                //System.out.println("FLAG");
 
                 if (isInteracting) {
                     isInteracting = false;
                     conquerTheFlag.setActiveScene(2);
                 }
+            }
+            if (collider instanceof Gate) {
+
             }
             if (collider instanceof Door)
             {
@@ -133,7 +137,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 }
             }
             if (collider instanceof Pickaxe) {
-                System.out.println("Pickaxe");
+                //System.out.println("Pickaxe");
                 pickaxePickedup = true;
                 collidedPickaxe = (Pickaxe)collider;
                 collidedPickaxe.pickaxeTopleft();
