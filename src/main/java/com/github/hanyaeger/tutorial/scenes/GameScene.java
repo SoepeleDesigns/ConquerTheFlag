@@ -33,8 +33,12 @@ public class GameScene extends DynamicScene implements TileMapContainer {
         Door door = new Door(
                 new Coordinate2D(getWidth() - 100, 0));
 
+        Gate gate = new Gate(new Coordinate2D(200, 300));
+        addEntity(gate);
+
         Switch lever = new Switch(
-              new Coordinate2D(200, getHeight() - 50), door);
+              new Coordinate2D(200, getHeight() - 50), door, gate);
+
 
 
         Flag flag = new Flag(

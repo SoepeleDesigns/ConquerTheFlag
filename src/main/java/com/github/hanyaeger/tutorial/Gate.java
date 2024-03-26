@@ -1,15 +1,16 @@
 package com.github.hanyaeger.tutorial;
 
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collider;
-import com.github.hanyaeger.api.entities.impl.SpriteEntity;
+import com.github.hanyaeger.api.entities.impl.RectangleEntity;
 
-public class Gate extends SpriteEntity implements Collider {
-   public Gate(Coordinate2D initialLocation) {
-       super("sprites/gate.png", initialLocation);
+public class Gate extends RectangleEntity implements Collider {
+    public Gate(Coordinate2D initialLocation) {
+        super(initialLocation, new Size(20, 100));
     }
 
-    void removeGate() {
-
+    public void openGate() {
+        remove();
     }
 }
