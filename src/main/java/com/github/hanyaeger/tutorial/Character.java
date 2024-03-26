@@ -1,6 +1,7 @@
 package com.github.hanyaeger.tutorial;
 
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
@@ -27,7 +28,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     private final Animation jumpAnimation = new LoopingAnimation(3, 1, 3, 1);
 
     public Character(Coordinate2D location, ConquerTheFlag conquerTheFlag) {
-        super("sprites/character.png", location, 4, 9);
+        super("sprites/character.png", location, new Size(50, 40), 4, 9);
         this.conquerTheFlag = conquerTheFlag;
         setGravityConstant(FALLING);
     }
@@ -40,13 +41,13 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 setGravityConstant(FALLING);
                 playAnimation(jumpAnimation);
                 if (touchdown) {
-                    setMotion(7, 180d);
+                    setMotion(4, 180d);
                 }
                 if (pressedKeys.contains(KeyCode.LEFT)) {
-                    setMotion(7, 200d);
+                    setMotion(4, 200d);
 
                 } else if (pressedKeys.contains(KeyCode.RIGHT)) {
-                    setMotion(7, 150d);
+                    setMotion(4, 150d);
                 }
                 isInteracting = false;
                 touchdown = false;
@@ -155,13 +156,14 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 setGravityConstant(FALLING);
                 touchdown = true;
                 System.out.println(getBoundingBox().getWidth());
-
-                if (getAnchorLocation().getX() < getBoundingBox().getMinX() + 0)
+                /*
+                if (getAnchorLocation().getX() < getBoundingBox().getMinX() + 0.01f)
                 {
                         playAnimation(jumpAnimation);
                         setGravityConstant(FALLING);
                         touchdown = false;
                 }
+                */
             }
             if (collider instanceof LaunchPad)
             {

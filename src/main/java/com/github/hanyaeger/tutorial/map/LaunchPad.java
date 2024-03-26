@@ -9,6 +9,6 @@ public class LaunchPad extends SpriteEntity implements Collider {
 
     public LaunchPad(Coordinate2D initialLocation, Size size, String resource) {
         super(resource, initialLocation, new Size(40,10));
-        setAnchorLocationY(getAnchorLocation().getY() + 45);
+        setAnchorLocationY(getAnchorLocation().getY() + 37);
     }
 }
