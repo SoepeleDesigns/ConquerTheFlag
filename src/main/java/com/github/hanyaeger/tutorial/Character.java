@@ -133,6 +133,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                     {
                         isInteracting = false;
                         conquerTheFlag.setActiveScene(2);
+
                     }
                 }
             }
@@ -191,8 +192,12 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 // links springen
                 if ((int)getDirection() == 200)
                 {
+                    if(getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight() &&
+                        getAnchorLocation().getX() >= platform.getBoundingBox().getMaxX() - 4) {
+                        setAnchorLocationX(platform.getBoundingBox().getMaxX() + 2);
+                    }
                     // van beneden gesprongen en de blok aangeraakt
-                    if (getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight())
+                    else if (getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight())
                     {
                         setGravityConstant(FALLING);
                         setAnchorLocationY(platform.getBoundingBox().getMaxY()  + 2);
@@ -211,8 +216,12 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 // rechts springen
                 if ((int)getDirection() == 150)
                 {
+                    if(getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight() &&
+                            getAnchorLocation().getX() <= platform.getBoundingBox().getMinX() + 4) {
+                        setAnchorLocationX(platform.getBoundingBox().getMinX() - 2);
+                    }
                     // van beneden gesprongen en de blok aangeraakt
-                    if (getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight())
+                    else if (getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight())
                     {
                         setGravityConstant(FALLING);
                         setAnchorLocationY(platform.getBoundingBox().getMaxY()  + 2);
