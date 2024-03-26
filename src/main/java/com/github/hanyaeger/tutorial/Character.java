@@ -118,6 +118,9 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                     conquerTheFlag.setActiveScene(2);
                 }
             }
+            if (collider instanceof Gate) {
+
+            }
             if (collider instanceof Door)
             {
                 collidedDoor = (Door)collider;
