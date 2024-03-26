@@ -6,6 +6,7 @@ import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
+import com.github.hanyaeger.tutorial.map.Block;
 import com.github.hanyaeger.tutorial.map.BreakableBlock;
 import com.github.hanyaeger.tutorial.map.LaunchPad;
 import com.github.hanyaeger.tutorial.map.UnbreakableBlock;
@@ -113,7 +114,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
             }
             if (collider instanceof Flag)
             {
-                System.out.println("FLAG");
+                //System.out.println("FLAG");
 
                 if (isInteracting) {
                     isInteracting = false;
@@ -136,7 +137,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 }
             }
             if (collider instanceof Pickaxe) {
-                System.out.println("Pickaxe");
+                //System.out.println("Pickaxe");
                 pickaxePickedup = true;
                 collidedPickaxe = (Pickaxe)collider;
                 collidedPickaxe.pickaxeTopleft();
@@ -153,21 +154,40 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
             }
             if (collider instanceof UnbreakableBlock)
             {
-                platform = (UnbreakableBlock)collider;
-                //"case 150 -- detection above
-                setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight());
-                System.out.println((int)getDirection());
+                platform = (UnbreakableBlock) collider;
+                System.out.println((int)(getDirection()));
+                switch((int)(getDirection())){
+                    //links = 270
+                    case 270:
+                        setAnchorLocationX(platform.getBoundingBox().getMaxX() + 1);
+                        break;
+                        //rechts = 90
+                    case 90:
+                        setAnchorLocationX(platform.getBoundingBox().getMinX() - 1);
+                        break;
+                        //spring = 180
+                    case 180:
+                        if(getAnchorLocation().getY() <= platform.getBoundingBox().getMaxY() &&
+                                getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - 20) {
+                            setAnchorLocationY(platform.getBoundingBox().getMaxY() + 1);
+                            setSpeed(0);
+                            //falling zou niet moeten tijdelijk
+                            setGravityConstant(FALLING);
+                        } else if(getAnchorLocation().getY() <= platform.getBoundingBox().getMinY() &&
+                                getAnchorLocation().getY() >= platform.getBoundingBox().getMinY() + 20) {
+                            setAnchorLocationY(platform.getBoundingBox().getMinY() - 1);
+                        }
+                        break;
+                        //springTechts = 150
+                    case 150:
+                        break;
+                        //setAnchorLocationX(getSceneWidth() - getWidth() - 1);
+                    //springLinks = 200
+                    case 200:
+                        break;
+                }
                 setGravityConstant(FALLING);
                 touchdown = true;
-                System.out.println(getBoundingBox().getWidth());
-                /*
-                if (getAnchorLocation().getX() < getBoundingBox().getMinX() + 0.01f)
-                {
-                        playAnimation(jumpAnimation);
-                        setGravityConstant(FALLING);
-                        touchdown = false;
-                }
-                */
             }
             if (collider instanceof LaunchPad)
             {
