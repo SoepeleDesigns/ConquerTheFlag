@@ -98,10 +98,10 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
         Door collidedDoor;
         UnbreakableBlock platform;
         Pickaxe collidedPickaxe;
-        LaunchPad launchPad;
 
         BreakableBlock collidedBreakableBlock;
         for (Collider collider : collidingObject) {
+
             if (collider instanceof Switch) {
                // System.out.println("SWITCH");
                 if (isInteracting)
@@ -150,26 +150,92 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
             }
             if (collider instanceof UnbreakableBlock)
             {
-                platform = (UnbreakableBlock)collider;
-                //"case 150 -- detection above
-                setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight());
-                System.out.println((int)getDirection());
-                setGravityConstant(FALLING);
-                touchdown = true;
-                System.out.println(getBoundingBox().getWidth());
-                /*
-                if (getAnchorLocation().getX() < getBoundingBox().getMinX() + 0.01f)
+                setSpeed(0);
+                platform = (UnbreakableBlock) collider;
+
+                // links
+                if ((int)getDirection() == 270)
                 {
-                        playAnimation(jumpAnimation);
-                        setGravityConstant(FALLING);
-                        touchdown = false;
+                    setAnchorLocationX(platform.getBoundingBox().getMaxX() + 2);
                 }
-                */
+                // rechts
+                if ((int)getDirection() == 90)
+                {
+                    setAnchorLocationX(platform.getBoundingBox().getMinX() - 37);
+                }
+                // springen
+                if ((int)getDirection() == 180)
+                {
+                        // van beneden gesprongen en de blok aangeraakt
+                    if (getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight())
+                    {
+                        setGravityConstant(FALLING);
+                        setAnchorLocationY(platform.getBoundingBox().getMaxY()  + 2);
+                        touchdown = true;
+                    }
+
+                    // van boven gesprongen en geland op de blok
+                    else if (getAnchorLocation().getY() >= platform.getBoundingBox().getMinY() - getHeight())
+                    {
+                       setGravityConstant(NOTFALLING);
+                       setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight() - 2);
+                        touchdown = true;
+                       playAnimation(idleAnimation);
+                    }
+
+                }
+                // links springen
+                if ((int)getDirection() == 200)
+                {
+                    // van beneden gesprongen en de blok aangeraakt
+                    if (getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight())
+                    {
+                        setGravityConstant(FALLING);
+                        setAnchorLocationY(platform.getBoundingBox().getMaxY()  + 2);
+                    }
+
+                    // van boven gesprongen en geland op de blok
+                    else if (getAnchorLocation().getY() >= platform.getBoundingBox().getMinY() - getHeight())
+                    {
+                        //System.out.println("van links springen geland");
+                        setGravityConstant(NOTFALLING);
+                        setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight() - 2);
+                        touchdown = true;
+                        playAnimation(idleAnimation);
+                    }
+                }
+                // rechts springen
+                if ((int)getDirection() == 150)
+                {
+                    // van beneden gesprongen en de blok aangeraakt
+                    if (getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight())
+                    {
+                        setGravityConstant(FALLING);
+                        setAnchorLocationY(platform.getBoundingBox().getMaxY()  + 2);
+                    }
+                    // van boven gesprongen en geland op de blok
+                    else if (getAnchorLocation().getY() >= platform.getBoundingBox().getMinY() - getHeight())
+                    {
+                        System.out.println("van links springen geland");
+                        setGravityConstant(NOTFALLING);
+                        setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight() - 2);
+                        touchdown = true;
+                        playAnimation(idleAnimation);
+                    }
+
+                }
+                // vallen zonder springen
+                if ((int)getDirection() == 0)
+                {
+                    setGravityConstant(NOTFALLING);
+                    setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight() - 1);
+                }
             }
             if (collider instanceof LaunchPad)
             {
                 if ((int)getDirection() == 90)
                 {
+
                     playAnimation(jumpAnimation);
                     setMotion(10, 150d);
                     setGravityConstant(FALLING);
@@ -177,10 +243,10 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 }
                 if ((int)getDirection() == 270)
                 {
-                    playAnimation(jumpAnimation);
-                    setMotion(10, 200d);
-                    setGravityConstant(FALLING);
-                    touchdown = false;
+                        playAnimation(jumpAnimation);
+                        setMotion(10, 200d);
+                        setGravityConstant(FALLING);
+                        touchdown = false;
                 }
             }
             }

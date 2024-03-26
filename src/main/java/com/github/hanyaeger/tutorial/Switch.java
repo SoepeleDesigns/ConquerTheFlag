@@ -14,7 +14,6 @@ public class Switch extends SpriteEntity implements Collider {
         this.door = door;
         this.gate = gate;
         setCurrentFrameIndex(1);
-
     }
 
     public Switch(Coordinate2D initialLocation, Gate gate) {
@@ -24,7 +23,7 @@ public class Switch extends SpriteEntity implements Collider {
 
     }
 
-    void switching() {
+   public void switching() {
         setCurrentFrameIndex(0);
 
         if (this.door == null)
