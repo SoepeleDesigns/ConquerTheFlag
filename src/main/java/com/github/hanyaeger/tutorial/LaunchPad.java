@@ -8,8 +8,4 @@ public class LaunchPad extends SpriteEntity implements Collider {
     public LaunchPad(Coordinate2D initialLocation) {
         super("sprites/launchpad.png", initialLocation);
     }
-
-    void launch() {
-
-    }
 }

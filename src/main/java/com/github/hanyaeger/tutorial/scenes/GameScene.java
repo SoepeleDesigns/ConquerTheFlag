@@ -1,7 +1,6 @@
 package com.github.hanyaeger.tutorial.scenes;
 
 import com.github.hanyaeger.api.Coordinate2D;
-import com.github.hanyaeger.api.EntitySpawnerContainer;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.scenes.TileMapContainer;
 import com.github.hanyaeger.tutorial.*;
@@ -10,12 +9,10 @@ import com.github.hanyaeger.tutorial.Switch;
 import com.github.hanyaeger.tutorial.Flag;
 import com.github.hanyaeger.tutorial.Pickaxe;
 import com.github.hanyaeger.tutorial.map.BlockTileMap;
-import com.github.hanyaeger.tutorial.map.BreakableBlock;
 
-public class GameScene extends DynamicScene implements EntitySpawnerContainer, TileMapContainer {
+public class GameScene extends DynamicScene implements TileMapContainer {
 
     ConquerTheFlag conquerTheFlag;
-
     BlockTileMap blockTileMap = new BlockTileMap();
 
     public GameScene(ConquerTheFlag conquerTheFlag){
@@ -46,17 +43,11 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, T
         Pickaxe pickaxe = new Pickaxe(
                 new Coordinate2D(300, 300));
 
-
         addEntity(door);
         addEntity((lever));
         addEntity(flag);
         addEntity(pickaxe);
         addEntity(character);
-
-    }
-
-    @Override
-    public void setupEntitySpawners() {
 
     }
 

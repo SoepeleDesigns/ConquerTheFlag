@@ -11,6 +11,6 @@ public class BreakableBlock extends SpriteEntity implements Collider {
     }
 
     public void breakWall() {
-
+        remove();
     }
 }
