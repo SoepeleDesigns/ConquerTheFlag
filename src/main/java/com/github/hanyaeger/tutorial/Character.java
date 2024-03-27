@@ -102,6 +102,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
         Door collidedDoor;
         UnbreakableBlock platform;
         Pickaxe collidedPickaxe;
+        Gate collidedGate;
 
         BreakableBlock collidedBreakableBlock;
         for (Collider collider : collidingObject) {
@@ -125,7 +126,21 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 }
             }
             if (collider instanceof Gate) {
+                collidedGate = (Gate)collider;
+                if (collidedGate.isOpened == false)
+                {
+                    // links
+                    if ((int)getDirection() > 0 && getAnchorLocation().getX() > collidedGate.getBoundingBox().getMaxX() - getWidth())
+                    {
+                        System.out.println("de nieuwe kant");
+                         setAnchorLocationX(collidedGate.getBoundingBox().getMaxX() + 2);
+                    }
+                    else if ((int)getDirection() > 0 && getAnchorLocation().getX() > collidedGate.getBoundingBox().getMaxX() - getWidth() - 27)
+                    {
+                        setAnchorLocationX(collidedGate.getBoundingBox().getMinX() - 20);
+                    }
 
+                }
             }
             if (collider instanceof Door)
             {
