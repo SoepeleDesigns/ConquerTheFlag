@@ -172,7 +172,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                    isInteracting = false;
                }
             }
-            if (collider instanceof UnbreakableBlock || collider instanceof  BreakableBlock)
+            if (collider instanceof UnbreakableBlock || collider instanceof BreakableBlock)
             {
                 setSpeed(0);
                 Block platform;
