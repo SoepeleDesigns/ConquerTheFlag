@@ -59,6 +59,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 setMotion(3, 270d);
                 playAnimation(leftAnimation);
                 isInteracting = false;
+
             } else if (pressedKeys.contains(KeyCode.RIGHT)) {
                 setMotion(3, 90d);
                 playAnimation(rightAnimation);
