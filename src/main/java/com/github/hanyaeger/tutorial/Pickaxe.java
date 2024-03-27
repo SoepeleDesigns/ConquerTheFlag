@@ -19,7 +19,4 @@ public class Pickaxe extends SpriteEntity implements Collider {
         remove();
 
     }
-    void mining () {
-
-    }
 }

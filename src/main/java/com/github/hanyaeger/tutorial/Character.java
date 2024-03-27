@@ -36,7 +36,6 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
 
     }
 
-
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
         if (pressedKeys.contains(KeyCode.E)) {

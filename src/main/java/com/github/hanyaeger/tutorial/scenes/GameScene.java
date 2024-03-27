@@ -16,8 +16,6 @@ public class GameScene extends DynamicScene implements TileMapContainer {
     ConquerTheFlag conquerTheFlag;
     BlockTileMap blockTileMap = new BlockTileMap();
 
-    ArrayList<Doelwit> doelwits = new ArrayList<>();
-
     public GameScene(ConquerTheFlag conquerTheFlag){
         this.conquerTheFlag = conquerTheFlag;
     }
@@ -31,15 +29,12 @@ public class GameScene extends DynamicScene implements TileMapContainer {
     public void setupEntities() {
 
         Character character = new Character(
-                new Coordinate2D(getWidth(), 0), conquerTheFlag);
+                new Coordinate2D(0, getHeight()), conquerTheFlag);
+
+        Gate gate = new Gate(new Coordinate2D(200, 183));
 
         Switch lever = new Switch(
-              new Coordinate2D(200, getHeight() - 40));
-
-        Doelwit gate = new Gate(new Coordinate2D(200, 183));
-
-        doelwits.add(gate);
-
+                new Coordinate2D(200, getHeight() - 40), gate);
         Flag flag = new Flag(
                 new Coordinate2D(getWidth() - 60, getHeight() - 60));
 
@@ -51,6 +46,7 @@ public class GameScene extends DynamicScene implements TileMapContainer {
         addEntity(flag);
         addEntity(pickaxe);
         addEntity(character);
+
     }
 
     public void setupTileMaps() {
