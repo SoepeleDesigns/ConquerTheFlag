@@ -6,12 +6,16 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.RectangleEntity;
 import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 
-public class Gate extends Doelwit implements Collider {
+public class Gate extends Doelwit {
     public Gate(Coordinate2D initialLocation) {
-        super(initialLocation, new Size(20, 95), "sprites/gate.png");
+        super(initialLocation, new Size(50,97), "sprites/gate.png");
     }
 
-    public void openGate() {
-        remove();
+    @Override
+    public void open() {
+        System.out.println("Gate geopend!");
+        isOpened = true;
+        setCurrentFrameIndex(1);
     }
+
 }
