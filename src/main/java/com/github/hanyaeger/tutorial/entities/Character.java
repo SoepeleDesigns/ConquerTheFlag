@@ -1,4 +1,4 @@
-package com.github.hanyaeger.tutorial;
+package com.github.hanyaeger.tutorial.entities;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
@@ -6,13 +6,17 @@ import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
-import com.github.hanyaeger.tutorial.map.Block;
-import com.github.hanyaeger.tutorial.map.BreakableBlock;
-import com.github.hanyaeger.tutorial.map.LaunchPad;
-import com.github.hanyaeger.tutorial.map.UnbreakableBlock;
+import com.github.hanyaeger.core.entities.Bounded;
+import com.github.hanyaeger.tutorial.*;
+import com.github.hanyaeger.tutorial.entities.lever.Door;
+import com.github.hanyaeger.tutorial.entities.lever.Gate;
+import com.github.hanyaeger.tutorial.entities.lever.Switch;
+import com.github.hanyaeger.tutorial.entities.map.Block;
+import com.github.hanyaeger.tutorial.entities.map.BreakableBlock;
+import com.github.hanyaeger.tutorial.entities.map.LaunchPad;
+import com.github.hanyaeger.tutorial.entities.map.UnbreakableBlock;
 import javafx.scene.input.KeyCode;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -100,7 +104,6 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
     public void onCollision(List<Collider> collidingObject) {
         Switch collidedSwitch;
         Door collidedDoor;
-        UnbreakableBlock platform;
         Pickaxe collidedPickaxe;
         Gate collidedGate;
 
@@ -150,7 +153,6 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                     {
                         isInteracting = false;
                         conquerTheFlag.setActiveScene(2);
-
                     }
                 }
             }
@@ -169,99 +171,12 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                    collidedBreakableBlock.breakWall();
                    isInteracting = false;
                }
-                // links
-                if ((int)getDirection() == 270)
-                {
-                    setAnchorLocationX(collidedBreakableBlock.getBoundingBox().getMaxX() + 2);
-                }
-               // rechts
-               if ((int)getDirection() == 90)
-               {
-                   setAnchorLocationX(collidedBreakableBlock.getBoundingBox().getMinX() - 27);
-               }
-
-               // rechts springen
-               if ((int)getDirection() == 150)
-               {
-                   System.out.println("rechts springen breakable block");
-                   setAnchorLocationX(collidedBreakableBlock.getBoundingBox().getMinX() - 27);
-                   setGravityConstant(FALLING);
-               }
-                // links springen
-                if ((int)getDirection() == 200)
-                {
-                    if(getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMaxY() - getHeight() &&
-                            getAnchorLocation().getX() >= collidedBreakableBlock.getBoundingBox().getMaxX() - 4) {
-                        setAnchorLocationX(collidedBreakableBlock.getBoundingBox().getMaxX() + 2);
-                    }
-                    // van beneden gesprongen en de blok aangeraakt
-                    else if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMaxY() - getHeight())
-                    {
-                        setGravityConstant(FALLING);
-                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMaxY()  + 2);
-                    }
-
-                    // van boven gesprongen en geland op de blok
-                    else if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMinY() - getHeight())
-                    {
-                        //System.out.println("van links springen geland");
-                        setGravityConstant(NOTFALLING);
-                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMinY() - getHeight() - 2);
-                        touchdown = true;
-                        playAnimation(idleAnimation);
-                    }
-                }
-
-                // rechts springen
-                if ((int)getDirection() == 150)
-                {
-                    if(getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMaxY() - getHeight() &&
-                            getAnchorLocation().getX() <= collidedBreakableBlock.getBoundingBox().getMinX() + 4) {
-                        setAnchorLocationX(collidedBreakableBlock.getBoundingBox().getMinX() - 32);
-                    }
-                    // van beneden gesprongen en de blok aangeraakt
-                    else if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMaxY() - getHeight())
-                    {
-                        setGravityConstant(FALLING);
-                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMaxY()  + 2);
-                    }
-                    // van boven gesprongen en geland op de blok
-                    else if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMinY() - getHeight())
-                    {
-                        System.out.println("van links springen geland");
-                        setGravityConstant(NOTFALLING);
-                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMinY() - getHeight() - 2);
-                        touchdown = true;
-                        playAnimation(idleAnimation);
-                    }
-                }
-                // springen
-                if ((int)getDirection() == 180)
-                {
-                    // van beneden gesprongen en de blok aangeraakt
-                    if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMaxY() - getHeight())
-                    {
-                        setGravityConstant(FALLING);
-                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMaxY()  + 2);
-                        touchdown = true;
-                    }
-
-                    // van boven gesprongen en geland op de blok
-                    else if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMinY() - getHeight())
-                    {
-                        setGravityConstant(NOTFALLING);
-                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMinY() - getHeight() - 2);
-                        touchdown = true;
-                        playAnimation(idleAnimation);
-                    }
-
-                }
-
             }
-            if (collider instanceof UnbreakableBlock)
+            if (collider instanceof UnbreakableBlock || collider instanceof  BreakableBlock)
             {
                 setSpeed(0);
-                platform = (UnbreakableBlock) collider;
+                Block platform;
+                platform = (Block)collider;
 
                 // links
                 if ((int)getDirection() == 270)
@@ -318,6 +233,7 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                     }
 
                     // van boven gesprongen en geland op de blok
+
                     else if (getAnchorLocation().getY() >= platform.getBoundingBox().getMinY() - getHeight())
                     {
                        setGravityConstant(NOTFALLING);

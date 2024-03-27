@@ -4,13 +4,12 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.scenes.TileMapContainer;
 import com.github.hanyaeger.tutorial.*;
-import com.github.hanyaeger.tutorial.Character;
-import com.github.hanyaeger.tutorial.Switch;
-import com.github.hanyaeger.tutorial.Flag;
-import com.github.hanyaeger.tutorial.Pickaxe;
-import com.github.hanyaeger.tutorial.map.BlockTileMap;
-
-import java.util.ArrayList;
+import com.github.hanyaeger.tutorial.entities.Character;
+import com.github.hanyaeger.tutorial.entities.lever.Gate;
+import com.github.hanyaeger.tutorial.entities.lever.Switch;
+import com.github.hanyaeger.tutorial.entities.Flag;
+import com.github.hanyaeger.tutorial.entities.Pickaxe;
+import com.github.hanyaeger.tutorial.entities.map.BlockTileMap;
 
 public class GameScene extends DynamicScene implements TileMapContainer {
     ConquerTheFlag conquerTheFlag;

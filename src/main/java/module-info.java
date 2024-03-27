@@ -7,6 +7,8 @@ module conquertheflag {
     opens audio;
     opens backgrounds;
     opens sprites;
-    exports com.github.hanyaeger.tutorial.map;
+    exports com.github.hanyaeger.tutorial.entities.map;
+    exports com.github.hanyaeger.tutorial.entities;
+    exports com.github.hanyaeger.tutorial.entities.lever;
 
 }

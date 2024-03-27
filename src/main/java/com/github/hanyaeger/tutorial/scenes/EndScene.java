@@ -3,7 +3,7 @@ package com.github.hanyaeger.tutorial.scenes;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
 import com.github.hanyaeger.api.scenes.StaticScene;
-import com.github.hanyaeger.tutorial.Button;
+import com.github.hanyaeger.tutorial.entities.Button;
 import com.github.hanyaeger.tutorial.ConquerTheFlag;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
