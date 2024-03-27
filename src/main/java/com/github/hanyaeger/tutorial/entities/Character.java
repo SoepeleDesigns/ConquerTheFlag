@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Character extends DynamicSpriteEntity implements KeyListener, SceneBorderTouchingWatcher, Newtonian, Collided {
-    ConquerTheFlag conquerTheFlag;
+    private ConquerTheFlag conquerTheFlag;
     private boolean touchdown = true;
     private boolean pickaxePickedup = false;
     private final double FALLING = 0.1;

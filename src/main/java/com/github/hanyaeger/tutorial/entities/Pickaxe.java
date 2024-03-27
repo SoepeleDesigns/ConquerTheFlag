@@ -7,8 +7,6 @@ import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 import com.github.hanyaeger.tutorial.entities.map.BreakableBlock;
 
 public class Pickaxe extends SpriteEntity implements Collider {
-    boolean pickedUp;
-    BreakableBlock wall;
 
     public Pickaxe(Coordinate2D initialLocation) {
 
@@ -17,6 +15,5 @@ public class Pickaxe extends SpriteEntity implements Collider {
 
     void pickaxeTopleft () {
         remove();
-
     }
 }

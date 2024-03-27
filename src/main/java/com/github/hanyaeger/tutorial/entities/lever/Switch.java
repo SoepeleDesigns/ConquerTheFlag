@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Switch extends SpriteEntity implements Collider {
 
-    ArrayList<Doelwit> doelwitten = new ArrayList<Doelwit>();
+   private ArrayList<Doelwit> doelwitten = new ArrayList<Doelwit>();
 
 
     public Switch(Coordinate2D initialLocation, Door door, Gate gate) {
