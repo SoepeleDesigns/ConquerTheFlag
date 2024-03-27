@@ -132,14 +132,13 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                     // links
                     if ((int)getDirection() > 0 && getAnchorLocation().getX() > collidedGate.getBoundingBox().getMaxX() - getWidth())
                     {
-                        System.out.println("de nieuwe kant");
                          setAnchorLocationX(collidedGate.getBoundingBox().getMaxX() + 2);
                     }
+                    // rechts
                     else if ((int)getDirection() > 0 && getAnchorLocation().getX() > collidedGate.getBoundingBox().getMaxX() - getWidth() - 27)
                     {
                         setAnchorLocationX(collidedGate.getBoundingBox().getMinX() - 20);
                     }
-
                 }
             }
             if (collider instanceof Door)
