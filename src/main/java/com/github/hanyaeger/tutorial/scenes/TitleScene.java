@@ -14,7 +14,6 @@ import javafx.scene.text.FontWeight;
 import java.util.Scanner;
 
 public class TitleScene extends StaticScene {
-
     private ConquerTheFlag conquerTheFlag;
 
     public TitleScene(ConquerTheFlag conquerTheFlag){
@@ -39,7 +38,7 @@ public class TitleScene extends StaticScene {
         addEntity(conquerTheFlagText);
 
         Button button = new Button(
-                new Coordinate2D(getWidth() / 3,getHeight() / 2), conquerTheFlag, "Start game");
+                new Coordinate2D(getWidth() / 3,getHeight() / 2), conquerTheFlag, "Start game", 1);
         addEntity(button);
     }
 }

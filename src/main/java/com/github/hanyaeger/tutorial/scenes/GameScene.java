@@ -10,10 +10,13 @@ import com.github.hanyaeger.tutorial.Flag;
 import com.github.hanyaeger.tutorial.Pickaxe;
 import com.github.hanyaeger.tutorial.map.BlockTileMap;
 
-public class GameScene extends DynamicScene implements TileMapContainer {
+import java.util.ArrayList;
 
+public class GameScene extends DynamicScene implements TileMapContainer {
     ConquerTheFlag conquerTheFlag;
     BlockTileMap blockTileMap = new BlockTileMap();
+
+    ArrayList<Doelwit> doelwits = new ArrayList<>();
 
     public GameScene(ConquerTheFlag conquerTheFlag){
         this.conquerTheFlag = conquerTheFlag;
@@ -30,12 +33,12 @@ public class GameScene extends DynamicScene implements TileMapContainer {
         Character character = new Character(
                 new Coordinate2D(getWidth(), 0), conquerTheFlag);
 
-        Gate gate = new Gate(new Coordinate2D(200, 183));
-        addEntity(gate);
-
         Switch lever = new Switch(
-              new Coordinate2D(200, getHeight() - 50), gate);
+              new Coordinate2D(200, getHeight() - 40));
 
+        Doelwit gate = new Gate(new Coordinate2D(200, 183));
+
+        doelwits.add(gate);
 
         Flag flag = new Flag(
                 new Coordinate2D(getWidth() - 60, getHeight() - 60));
@@ -44,10 +47,10 @@ public class GameScene extends DynamicScene implements TileMapContainer {
                 new Coordinate2D(410, 415));
 
         addEntity(lever);
+        addEntity(gate);
         addEntity(flag);
         addEntity(pickaxe);
         addEntity(character);
-
     }
 
     public void setupTileMaps() {

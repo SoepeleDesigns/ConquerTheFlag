@@ -12,6 +12,7 @@ import com.github.hanyaeger.tutorial.map.LaunchPad;
 import com.github.hanyaeger.tutorial.map.UnbreakableBlock;
 import javafx.scene.input.KeyCode;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -32,7 +33,9 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
         super("sprites/character.png", location, new Size(50, 42), 4, 9);
         this.conquerTheFlag = conquerTheFlag;
         setGravityConstant(FALLING);
+
     }
+
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
@@ -153,6 +156,94 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                    collidedBreakableBlock.breakWall();
                    isInteracting = false;
                }
+                // links
+                if ((int)getDirection() == 270)
+                {
+                    setAnchorLocationX(collidedBreakableBlock.getBoundingBox().getMaxX() + 2);
+                }
+               // rechts
+               if ((int)getDirection() == 90)
+               {
+                   setAnchorLocationX(collidedBreakableBlock.getBoundingBox().getMinX() - 27);
+               }
+
+               // rechts springen
+               if ((int)getDirection() == 150)
+               {
+                   System.out.println("rechts springen breakable block");
+                   setAnchorLocationX(collidedBreakableBlock.getBoundingBox().getMinX() - 27);
+                   setGravityConstant(FALLING);
+               }
+                // links springen
+                if ((int)getDirection() == 200)
+                {
+                    if(getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMaxY() - getHeight() &&
+                            getAnchorLocation().getX() >= collidedBreakableBlock.getBoundingBox().getMaxX() - 4) {
+                        setAnchorLocationX(collidedBreakableBlock.getBoundingBox().getMaxX() + 2);
+                    }
+                    // van beneden gesprongen en de blok aangeraakt
+                    else if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMaxY() - getHeight())
+                    {
+                        setGravityConstant(FALLING);
+                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMaxY()  + 2);
+                    }
+
+                    // van boven gesprongen en geland op de blok
+                    else if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMinY() - getHeight())
+                    {
+                        //System.out.println("van links springen geland");
+                        setGravityConstant(NOTFALLING);
+                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMinY() - getHeight() - 2);
+                        touchdown = true;
+                        playAnimation(idleAnimation);
+                    }
+                }
+
+                // rechts springen
+                if ((int)getDirection() == 150)
+                {
+                    if(getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMaxY() - getHeight() &&
+                            getAnchorLocation().getX() <= collidedBreakableBlock.getBoundingBox().getMinX() + 4) {
+                        setAnchorLocationX(collidedBreakableBlock.getBoundingBox().getMinX() - 32);
+                    }
+                    // van beneden gesprongen en de blok aangeraakt
+                    else if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMaxY() - getHeight())
+                    {
+                        setGravityConstant(FALLING);
+                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMaxY()  + 2);
+                    }
+                    // van boven gesprongen en geland op de blok
+                    else if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMinY() - getHeight())
+                    {
+                        System.out.println("van links springen geland");
+                        setGravityConstant(NOTFALLING);
+                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMinY() - getHeight() - 2);
+                        touchdown = true;
+                        playAnimation(idleAnimation);
+                    }
+                }
+                // springen
+                if ((int)getDirection() == 180)
+                {
+                    // van beneden gesprongen en de blok aangeraakt
+                    if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMaxY() - getHeight())
+                    {
+                        setGravityConstant(FALLING);
+                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMaxY()  + 2);
+                        touchdown = true;
+                    }
+
+                    // van boven gesprongen en geland op de blok
+                    else if (getAnchorLocation().getY() >= collidedBreakableBlock.getBoundingBox().getMinY() - getHeight())
+                    {
+                        setGravityConstant(NOTFALLING);
+                        setAnchorLocationY(collidedBreakableBlock.getBoundingBox().getMinY() - getHeight() - 2);
+                        touchdown = true;
+                        playAnimation(idleAnimation);
+                    }
+
+                }
+
             }
             if (collider instanceof UnbreakableBlock)
             {
@@ -163,11 +254,44 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                 if ((int)getDirection() == 270)
                 {
                     setAnchorLocationX(platform.getBoundingBox().getMaxX() + 2);
+                    if (getAnchorLocation().getY() >= platform.getBoundingBox().getMinY() - getHeight()
+                            && getGravityConstant() == FALLING)
+                    {
+                        System.out.println("van links springen geland");
+                        setGravityConstant(NOTFALLING);
+                        setAnchorLocationX(platform.getBoundingBox().getMinX() + 2);
+                        setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight() - 2);
+                        touchdown = true;
+                        playAnimation(idleAnimation);
+
+                    }
+                    else if (getAnchorLocation().getX() >= platform.getBoundingBox().getMinX() - 30)
+                    {
+                        setGravityConstant(FALLING);
+                        touchdown = false;
+                    }
                 }
                 // rechts
                 if ((int)getDirection() == 90)
                 {
-                    setAnchorLocationX(platform.getBoundingBox().getMinX() - 37);
+
+                    setAnchorLocationX(platform.getBoundingBox().getMinX() - 30);
+                    if (getAnchorLocation().getY() >= platform.getBoundingBox().getMinY() - getHeight()
+                            && getGravityConstant() == FALLING)
+                    {
+                        System.out.println("van links springen geland");
+                        setGravityConstant(NOTFALLING);
+                        setAnchorLocationX(platform.getBoundingBox().getMinX() + 30);
+                        setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight() - 2);
+                        touchdown = true;
+                        playAnimation(idleAnimation);
+
+                    }
+                    else if (getAnchorLocation().getX() >= platform.getBoundingBox().getMinX() - 30)
+                    {
+                        setGravityConstant(FALLING);
+                        touchdown = false;
+                    }
                 }
                 // springen
                 if ((int)getDirection() == 180)
@@ -214,12 +338,36 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                         playAnimation(idleAnimation);
                     }
                 }
+
+                if ((int)getDirection() == 210)
+                {
+                    if(getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight() &&
+                            getAnchorLocation().getX() >= platform.getBoundingBox().getMaxX() - 4) {
+                        setAnchorLocationX(platform.getBoundingBox().getMaxX() + 2);
+                    }
+                    // van beneden gesprongen en de blok aangeraakt
+                    else if (getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight())
+                    {
+                        setGravityConstant(FALLING);
+                        setAnchorLocationY(platform.getBoundingBox().getMaxY()  + 2);
+                    }
+
+                    // van boven gesprongen en geland op de blok
+                    else if (getAnchorLocation().getY() >= platform.getBoundingBox().getMinY() - getHeight())
+                    {
+                        //System.out.println("van links springen geland");
+                        setGravityConstant(NOTFALLING);
+                        setAnchorLocationY(platform.getBoundingBox().getMinY() - getHeight() - 2);
+                        touchdown = true;
+                        playAnimation(idleAnimation);
+                    }
+                }
                 // rechts springen
                 if ((int)getDirection() == 150)
                 {
                     if(getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight() &&
                             getAnchorLocation().getX() <= platform.getBoundingBox().getMinX() + 4) {
-                        setAnchorLocationX(platform.getBoundingBox().getMinX() - 2);
+                        setAnchorLocationX(platform.getBoundingBox().getMinX() - 32);
                     }
                     // van beneden gesprongen en de blok aangeraakt
                     else if (getAnchorLocation().getY() >= platform.getBoundingBox().getMaxY() - getHeight())
@@ -236,7 +384,6 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                         touchdown = true;
                         playAnimation(idleAnimation);
                     }
-
                 }
                 // vallen zonder springen
                 if ((int)getDirection() == 0)
@@ -255,10 +402,11 @@ public class Character extends DynamicSpriteEntity implements KeyListener, Scene
                     setGravityConstant(FALLING);
                     touchdown = false;
                 }
+                // links
                 if ((int)getDirection() == 270)
                 {
                         playAnimation(jumpAnimation);
-                        setMotion(10, 200d);
+                        setMotion(10, 210d);
                         setGravityConstant(FALLING);
                         touchdown = false;
                 }

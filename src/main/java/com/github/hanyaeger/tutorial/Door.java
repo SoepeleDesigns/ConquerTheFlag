@@ -5,15 +5,14 @@ import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 
-public class Door extends SpriteEntity implements Collider {
-    boolean isOpened = false;
+public class Door extends Doelwit {
 
     public Door(Coordinate2D initialLocation) {
-        super("sprites/door.png", initialLocation, 1, 2);
-        setCurrentFrameIndex(0);
+        super(initialLocation, new Size(50,50), "sprites/door.png");
     }
 
-    void openDoor() {
+    @Override
+    public void open() {
         isOpened = true;
         setCurrentFrameIndex(1);
     }

@@ -36,7 +36,7 @@ public class EndScene extends StaticScene {
         addEntity(gameOverText);
 
         Button button = new Button(
-                new Coordinate2D(getWidth() / 3,getHeight() / 2), conquerTheFlag, "Nieuw Spel");
+                new Coordinate2D(getWidth() / 3,getHeight() / 2), conquerTheFlag, "Nieuw Spel", 1);
 
         addEntity(button);
     }
