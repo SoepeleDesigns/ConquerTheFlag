@@ -1,4 +1,4 @@
-package com.github.hanyaeger.tutorial.entities.lever;
+package ConquerTheFlag.entities.lever;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;

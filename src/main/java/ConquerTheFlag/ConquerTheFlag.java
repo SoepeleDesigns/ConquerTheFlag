@@ -1,10 +1,9 @@
-package com.github.hanyaeger.tutorial;
+package ConquerTheFlag;
 
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.YaegerGame;
-import com.github.hanyaeger.tutorial.scenes.GameScene;
-import com.github.hanyaeger.tutorial.scenes.EndScene;
-import com.github.hanyaeger.tutorial.scenes.TitleScene;
+import ConquerTheFlag.scenes.GameScene;
+import ConquerTheFlag.scenes.EndScene;
 
 // hello world
 public class ConquerTheFlag extends YaegerGame {

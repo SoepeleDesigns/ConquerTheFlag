@@ -1,4 +1,4 @@
-package com.github.hanyaeger.tutorial.entities.map;
+package ConquerTheFlag.entities.map;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;

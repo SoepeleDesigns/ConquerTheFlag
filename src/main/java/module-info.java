@@ -2,13 +2,13 @@ module conquertheflag {
     requires hanyaeger;
     requires com.google.guice;
 
-    exports com.github.hanyaeger.tutorial;
+    exports ConquerTheFlag;
 
     opens audio;
     opens backgrounds;
     opens sprites;
-    exports com.github.hanyaeger.tutorial.entities.map;
-    exports com.github.hanyaeger.tutorial.entities;
-    exports com.github.hanyaeger.tutorial.entities.lever;
+    exports ConquerTheFlag.entities.map;
+    exports ConquerTheFlag.entities;
+    exports ConquerTheFlag.entities.lever;
 
 }

@@ -1,20 +1,20 @@
-package com.github.hanyaeger.tutorial.entities;
+package ConquerTheFlag.entities;
 
+import ConquerTheFlag.ConquerTheFlag;
+import ConquerTheFlag.entities.lever.Door;
+import ConquerTheFlag.entities.map.UnbreakableBlock;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
-import com.github.hanyaeger.core.entities.Bounded;
 import com.github.hanyaeger.tutorial.*;
-import com.github.hanyaeger.tutorial.entities.lever.Door;
-import com.github.hanyaeger.tutorial.entities.lever.Gate;
-import com.github.hanyaeger.tutorial.entities.lever.Switch;
-import com.github.hanyaeger.tutorial.entities.map.Block;
-import com.github.hanyaeger.tutorial.entities.map.BreakableBlock;
-import com.github.hanyaeger.tutorial.entities.map.LaunchPad;
-import com.github.hanyaeger.tutorial.entities.map.UnbreakableBlock;
+import ConquerTheFlag.entities.lever.Gate;
+import ConquerTheFlag.entities.lever.Switch;
+import ConquerTheFlag.entities.map.Block;
+import ConquerTheFlag.entities.map.BreakableBlock;
+import ConquerTheFlag.entities.map.LaunchPad;
 import javafx.scene.input.KeyCode;
 
 import java.util.List;

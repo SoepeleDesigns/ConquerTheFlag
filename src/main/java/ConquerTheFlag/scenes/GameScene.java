@@ -1,15 +1,16 @@
-package com.github.hanyaeger.tutorial.scenes;
+package ConquerTheFlag.scenes;
 
+import ConquerTheFlag.ConquerTheFlag;
+import ConquerTheFlag.entities.Character;
+import ConquerTheFlag.entities.Flag;
+import ConquerTheFlag.entities.Pickaxe;
+import ConquerTheFlag.entities.lever.Gate;
+import ConquerTheFlag.entities.lever.Switch;
+import ConquerTheFlag.entities.map.BlockTileMap;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.scenes.TileMapContainer;
 import com.github.hanyaeger.tutorial.*;
-import com.github.hanyaeger.tutorial.entities.Character;
-import com.github.hanyaeger.tutorial.entities.lever.Gate;
-import com.github.hanyaeger.tutorial.entities.lever.Switch;
-import com.github.hanyaeger.tutorial.entities.Flag;
-import com.github.hanyaeger.tutorial.entities.Pickaxe;
-import com.github.hanyaeger.tutorial.entities.map.BlockTileMap;
 
 public class GameScene extends DynamicScene implements TileMapContainer {
     ConquerTheFlag conquerTheFlag;
