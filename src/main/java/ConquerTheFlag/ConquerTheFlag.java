@@ -4,6 +4,7 @@ import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.YaegerGame;
 import ConquerTheFlag.scenes.GameScene;
 import ConquerTheFlag.scenes.EndScene;
+import ConquerTheFlag.scenes.TitleScene;
 
 // hello world
 public class ConquerTheFlag extends YaegerGame {
@@ -20,7 +21,7 @@ public class ConquerTheFlag extends YaegerGame {
 
     @Override
     public void setupScenes(){
-        //addScene(0, new TitleScene(this));
+        addScene(0, new TitleScene(this));
         addScene(1, new GameScene(this));
         addScene(2, new EndScene(this));
     }
