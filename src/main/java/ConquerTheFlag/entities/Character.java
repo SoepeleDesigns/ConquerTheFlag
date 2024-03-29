@@ -9,7 +9,7 @@ import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
-import com.github.hanyaeger.tutorial.*;
+import ConquerTheFlag.*;
 import ConquerTheFlag.entities.lever.Gate;
 import ConquerTheFlag.entities.lever.Switch;
 import ConquerTheFlag.entities.map.Block;

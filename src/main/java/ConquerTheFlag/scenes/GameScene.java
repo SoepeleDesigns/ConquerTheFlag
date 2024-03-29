@@ -10,7 +10,7 @@ import ConquerTheFlag.entities.map.BlockTileMap;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.scenes.TileMapContainer;
-import com.github.hanyaeger.tutorial.*;
+import ConquerTheFlag.*;
 
 public class GameScene extends DynamicScene implements TileMapContainer {
     ConquerTheFlag conquerTheFlag;
