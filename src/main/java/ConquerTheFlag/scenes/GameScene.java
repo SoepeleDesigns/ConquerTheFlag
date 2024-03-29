@@ -29,7 +29,7 @@ public class GameScene extends DynamicScene implements TileMapContainer {
     public void setupEntities() {
 
         Character character = new Character(
-                new Coordinate2D(0, getHeight()), conquerTheFlag);
+                new Coordinate2D(getWidth(), 60), conquerTheFlag);
 
         Gate gate = new Gate(new Coordinate2D(200, 183));
 
